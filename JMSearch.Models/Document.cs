@@ -8,7 +8,7 @@ namespace JMSearch.Models
 {
     public class Document
     {
-        #region Proprietes
+        #region Properties
         /// <summary>
         /// Document identifier
         /// </summary>
