@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.API", "JMSearch.API\JMSearch.API.csproj", "{2E92DA71-B6EE-46F3-8EBA-987DC3348EBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMSearch.API", "JMSearch.API\JMSearch.API.csproj", "{2E92DA71-B6EE-46F3-8EBA-987DC3348EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Documents.API", "JMSearch.Documents.API\JMSearch.Documents.API.csproj", "{6AB24A18-8B56-43E9-B854-E680E725B97E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JMSearch.Documents.API", "JMSearch.Documents.API\JMSearch.Documents.API.csproj", "{6AB24A18-8B56-43E9-B854-E680E725B97E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Documents.Treatment", "JMSearch.Documents.Treatment\JMSearch.Documents.Treatment.csproj", "{BBA2593C-A2C2-4CBF-B685-E9505CCA0E45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Models", "JMSearch.Models\JMSearch.Models.csproj", "{E1A08AE4-C7A9-49B9-8D1E-6827DC5C58A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Client", "JMSearch.Client\JMSearch.Client.csproj", "{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}"
 EndProject
@@ -27,6 +31,14 @@ Global
 		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBA2593C-A2C2-4CBF-B685-E9505CCA0E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA2593C-A2C2-4CBF-B685-E9505CCA0E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA2593C-A2C2-4CBF-B685-E9505CCA0E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA2593C-A2C2-4CBF-B685-E9505CCA0E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A08AE4-C7A9-49B9-8D1E-6827DC5C58A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A08AE4-C7A9-49B9-8D1E-6827DC5C58A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A08AE4-C7A9-49B9-8D1E-6827DC5C58A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A08AE4-C7A9-49B9-8D1E-6827DC5C58A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
