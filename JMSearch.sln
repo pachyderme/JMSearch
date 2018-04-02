@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.API", "JMSearch.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Documents.API", "JMSearch.Documents.API\JMSearch.Documents.API.csproj", "{6AB24A18-8B56-43E9-B854-E680E725B97E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JMSearch.Client", "JMSearch.Client\JMSearch.Client.csproj", "{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6AB24A18-8B56-43E9-B854-E680E725B97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AB24A18-8B56-43E9-B854-E680E725B97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AB24A18-8B56-43E9-B854-E680E725B97E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7DE34DA-DC61-4B42-AF5A-28F9378A7E64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
