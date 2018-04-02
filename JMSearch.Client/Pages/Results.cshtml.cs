@@ -10,8 +10,11 @@ namespace JMSearch.Client.Pages
 {
     public class ResultsModel : PageModel
     {
-        public string KeyWord { get; set; }
         private List<Result> Results { get; set; }
+
+        #region UIModel
+
+        public string KeyWord { get; set; }
 
         public IEnumerable<IGrouping<string, Result>> ResultsUI { get; set; }
 
@@ -21,54 +24,62 @@ namespace JMSearch.Client.Pages
 
         public int CurrentPageNumber { get; set; }
 
-        public void OnGet()
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnGet(int currentPageNumber, string keyWord)
         {
+            CurrentPageNumber = currentPageNumber;
+            KeyWord = keyWord;
+
+            GetResults();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void OnPost()
+        {
+            CurrentPageNumber = 1;
+
+            KeyWord = Request.Form["keyWord"];
+
+
+            if (Request.Form["JMHelp"].ToString() != string.Empty)
+            {
+                ViewData["JMHelp"] = true;
+                // JMHelp Mode
+            }
+
+            GetResults();
 
         }
 
-        public void OnPost()
+        /// <summary>
+        /// 
+        /// </summary>
+        private void GetResults()
         {
             NumberItemPerPage = 2;
 
-            byte[] isNextPage;
-            HttpContext.Session.TryGetValue("isNextPage", out isNextPage);
-
-            if (isNextPage == null)
+            if (KeyWord != null && KeyWord.Trim() != string.Empty)
             {
-                CurrentPageNumber = 1;
-                HttpContext.Session.Remove("isNextPage");
+                Results = new List<Result>
+                {
+                    new Result{ Content = "Toto1", DocumentName="Doc1"},
+                    new Result{ Content = "Toto2", DocumentName="Doc1"},
+                    new Result{ Content = "Toto3", DocumentName="Doc2"},
+                    new Result{ Content = "Toto4", DocumentName="Doc3"},
+                    new Result{ Content = "Toto5", DocumentName="Doc3"},
+                    new Result{ Content = "Toto6", DocumentName="Doc3"}
+                };
             }
             else
             {
-                byte[] currentPageNumberTmp;
-                HttpContext.Session.TryGetValue("CurrentPageNumber", out currentPageNumberTmp);
-                HttpContext.Session.Remove("CurrentPageNumber");
-
-                CurrentPageNumber = Convert.ToInt32(currentPageNumberTmp);
+                Results = new List<Result>();
             }
-
-            byte[] keyWordTmp;
-            HttpContext.Session.TryGetValue("KeyWord", out keyWordTmp);
-
-            if(keyWordTmp == null)
-            {
-                KeyWord = Convert.ToString(keyWordTmp);
-                HttpContext.Session.Remove("KeyWord");
-            }
-            else
-            {
-                KeyWord = Request.Form["keyWord"];
-            }
-
-            Results = new List<Result>
-            {
-                new Result{ Content = "Toto1", DocumentName="Doc1"},
-                new Result{ Content = "Toto2", DocumentName="Doc1"},
-                new Result{ Content = "Toto3", DocumentName="Doc2"},
-                new Result{ Content = "Toto4", DocumentName="Doc3"},
-                new Result{ Content = "Toto5", DocumentName="Doc3"},
-                new Result{ Content = "Toto6", DocumentName="Doc3"}
-            };
 
             ResultsUI = Results.GroupBy(r => r.DocumentName);
 
@@ -76,24 +87,18 @@ namespace JMSearch.Client.Pages
 
             int startSkip = -1;
 
-            if(CurrentPageNumber > 1)
+            if (CurrentPageNumber > 1)
             {
-                startSkip = NumberItemPerPage * CurrentPageNumber - 1;
+                startSkip = NumberItemPerPage * (CurrentPageNumber - 1);
             }
 
             ResultsUI = ResultsUI.Skip(startSkip).Take(NumberItemPerPage);
         }
-
-        public RedirectToActionResult NextPage()
-        {
-            HttpContext.Session.Set("isNextPage", BitConverter.GetBytes(true));
-            HttpContext.Session.Set("CurrentPageNumber", BitConverter.GetBytes(++CurrentPageNumber));
-            HttpContext.Session.Set("KeyWord", Encoding.ASCII.GetBytes(KeyWord));
-
-            return RedirectToAction("OnPost");
-        }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Result
     {
         public int Id { get; set; }
