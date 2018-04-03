@@ -1,22 +1,14 @@
 ﻿@page
 @model IndexModel
 
-<div style="text-align:center; margin-top:45vh; transform: translateY(-50%);">
-    <img src="~/images/logo.png" style="width:150px; display: inline-block; vertical-align:middle;"/>
-    <h1 style="font-family: 'Comic Sans MS'; font-weight: bold; display: inline-block; vertical-align:middle;">JMSearch</h1>
-    <form method="post" asp-page="/Results" style="text-align:center;">
-        <input placeholder="Rechercher..." type="search" name="keyWord" autofocus style="width:350px; height:30px;" />
+<div class="center">
+    <img src="~/images/logo.png" style="width:150px;"/>
+    <h1 style="font-weight: bold; display: inline-block; vertical-align:middle; font-size:3em;"><span style="color:greenyellow;">J</span><span style="color:blue;">M</span><span style="color:orangered;">S</span>earch</h1>
+    <form method="post" asp-page="/Results">
+        <input placeholder="Rechercher..." type="search" name="keyWord" autofocus />
         <div style="margin-top:1em;">
             <input type="submit" value="Rechercher" />
             <input type="submit" name="JMHelp" value="Aide moi JM !" />
         </div>
     </form>
 </div>
-
-<div style="position:absolute; top:1em; right:1em;">
-    <a asp-page="Login" style="vertical-align:middle;">JM+</a>
-    <img src="~/images/logo.png" style="width:50px; display: inline-block; vertical-align:middle;" />
-</div>
-
-
-
