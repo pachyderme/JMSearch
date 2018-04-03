@@ -8,7 +8,7 @@ namespace JMSearch.Models
 {
     public class Document
     {
-        #region Proprietes
+        #region Properties
         /// <summary>
         /// Document identifier
         /// </summary>
@@ -26,23 +26,6 @@ namespace JMSearch.Models
         /// Sum of them specifiy the most read docuement
         /// </summary>
         public int ViewNumber { get; set; }
-        #endregion
-
-        #region Contructors
-        /// <summary>
-        /// Document Constructor
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="paragraph"></param>
-        /// <param name="viewNumber"></param>
-        public Document(int id, string name, string paragraph, int viewNumber)
-        {
-            Id = id;
-            Name = name;
-            Paragraph = paragraph;
-            ViewNumber = viewNumber;
-        }
         #endregion
     }
 }

@@ -1,0 +1,56 @@
+﻿@page
+@model JMSearch.Client.Pages.ResultsModel
+
+<form method="post" style="text-align:left;">
+    <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" /></a>
+    <input placeholder="Rechercher..." type="search" name="keyWord" value="@Model.KeyWord" autofocus style="width: 350px; height:30px;" />
+    <input type="submit" value="Rechercher" />
+</form>
+
+@if (ViewData["JMHelp"] != null)
+{
+    <div style="text-align:center;">
+        <img src="~/images/logo.png" style="width:150px; display: inline-block; vertical-align:middle;" />
+    </div>
+}
+
+<div style="padding:0 5em 0 5em;">
+    <h2>Résultats</h2>
+
+    @if (Model.ResultsUI.Count() != 0)
+    {
+        @foreach (var r in Model.ResultsUI)
+        {
+            <h4>@r.First().DocumentName</h4>
+            <div style="padding:0 15px 0 15px;">
+                @foreach (var p in r)
+                {
+                    <p>@p.Content</p>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p>Aucun résultat</p>
+    }
+    <div>
+        @if (Model.MaxPage > 0)
+        {
+            <span>Page</span>
+            @for (int i = 1; i <= Model.MaxPage; i++)
+            {
+                if (i == Model.CurrentPageNumber)
+                {
+                    <a style="font-weight:bold; color:red;">@i</a>
+                }
+                else
+                {
+                    <a asp-page="Results" asp-route-currentPageNumber="@i" asp-route-keyWord="@Model.KeyWord">@i</a>
+                }
+            }
+        }
+
+    </div>
+
+</div>

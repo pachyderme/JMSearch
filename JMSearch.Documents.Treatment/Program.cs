@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JMSearch.Documents.Treatment.Services;
+using System;
 
 namespace JMSearch.Documents.Treatment
 {
@@ -6,7 +7,8 @@ namespace JMSearch.Documents.Treatment
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // New document parsing serice
+            new ParsingService(@"C:\ARCHI\");
         }
     }
 }
