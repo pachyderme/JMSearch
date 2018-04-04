@@ -54,13 +54,16 @@ namespace JMSearch.Models
         public DocumentsPaginate GetDocumentByPage(string keyWord, int lastPage)
         {
             var context = _Db.GetCollection<Document>("Document");
-            long maxPages = context.Count();
+
+            var query = Query<Document>.Where(d => d.Paragraph.Contains(keyWord));
+            var request = context.Find(query);
+            long maxPages = request.Count();
 
             var filterDocumentBuilder = Builders<Document>.Filter;
 
             DocumentsPaginate result = new DocumentsPaginate
             {
-                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, Query<Document>.Where(d => d.Paragraph.Contains(keyWord))).ToList(),
+                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, request).ToList(),
                 MaxPages = maxPages
             };
 
@@ -76,9 +79,11 @@ namespace JMSearch.Models
         public DocumentsPaginate GetDocumentsByPageFromHistory(string keyWord, int lastPage)
         {
             var context = _Db.GetCollection<History>("History");
-            long maxPages = context.Count();
+            var query = Query<History>.EQ(h => h.KeyWord, keyWord);
+            var request = context.Find(query);
+            long maxPages = request.Count();
 
-            var histories = GetListPaginate(context, keyWord, lastPage, maxPages, Query<History>.EQ(h => h.KeyWord, keyWord));
+            var histories = GetListPaginate(context, keyWord, lastPage, maxPages, request);
 
             DocumentsPaginate result = new DocumentsPaginate
             {
@@ -103,7 +108,7 @@ namespace JMSearch.Models
         /// <param name="maxPages"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, long maxPages, IMongoQuery query)
+        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, long maxPages, MongoCursor<T> request)
         {
             int startSkip = -1;
 
@@ -116,11 +121,11 @@ namespace JMSearch.Models
 
             if (startSkip >= 0)
             {
-                result = context.Find(query).SetLimit(10).SetSkip(startSkip);
+                result = request.SetLimit(10).SetSkip(startSkip);
             }
             else
             {
-                result = context.Find(query).SetLimit(10);
+                result = request.SetLimit(10);
             }
 
             return result;
