@@ -27,5 +27,18 @@ namespace JMSearch.API.Controllers
 
             return _DocumentDatabase.GetDocumentByPage(keyWord, currentPage);
         }
+
+        /// <summary>
+        /// POST the view for a document
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        [HttpGet("GetResponses/{documentId}")]
+        public void PostDocumentView(string documentId)
+        {
+            _DocumentDatabase = new DocumentDatabase();
+
+            _DocumentDatabase.IncrementViewDocument(documentId);
+        }
     }
 }
