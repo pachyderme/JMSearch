@@ -46,7 +46,7 @@ namespace JMSearch.Models
         }
 
         /// <summary>
-        /// 
+        /// Increment the document view
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>

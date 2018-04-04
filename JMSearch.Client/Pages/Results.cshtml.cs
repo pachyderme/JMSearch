@@ -26,9 +26,9 @@ namespace JMSearch.Client.Pages
 
         #endregion
 
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph, string documentId)
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
+            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph, documentId);
             DisplayLogInActions = true;
             SetConnectedState();
 
@@ -65,7 +65,7 @@ namespace JMSearch.Client.Pages
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync("http://192.168.206.117:5000/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+                HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
 
                 if (response.IsSuccessStatusCode)
                 {

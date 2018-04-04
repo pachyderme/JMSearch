@@ -33,7 +33,7 @@ namespace JMSearch.API.Controllers
         /// </summary>
         /// <param name="documentId"></param>
         /// <returns></returns>
-        [HttpGet("GetResponses/{documentId}")]
+        [HttpPost("PostDocumentView")]
         public void PostDocumentView(string documentId)
         {
             _DocumentDatabase = new DocumentDatabase();

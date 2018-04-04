@@ -12,7 +12,7 @@ namespace JMSearch.Client
         public bool IsConnected { get; set; }
         public bool DisplayLogInActions { get; set; }
 
-        public virtual void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
+        public virtual void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph, string documentId)
         {
             if(disconnect != null)
             {
