@@ -46,6 +46,21 @@ namespace JMSearch.Models
         }
 
         /// <summary>
+        /// Increment the document view
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <returns></returns>
+        public void IncrementViewDocument(string documentId)
+        {
+            var context = _Db.GetCollection<Document>("Document");
+            Document doc = context.FindOneById((BsonValue)documentId);
+
+            doc.ViewNumber++;
+
+            context.Save(doc);
+        }
+
+        /// <summary>
         /// Get the documents by page
         /// </summary>
         /// <param name="document"></param>
@@ -53,14 +68,14 @@ namespace JMSearch.Models
         {
             var context = _Db.GetCollection<Document>("Document");
 
-            var query = Query<Document>.Where(d => d.Paragraph.Contains(keyWord));
+            var query = Query<Document>.Where(d => d.Paragraph.ToLower().Contains(keyWord.ToLower()));
             long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
 
             var filterDocumentBuilder = Builders<Document>.Filter;
 
             DocumentsPaginate result = new DocumentsPaginate
             {
-                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, query).ToList(),
+                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, query).OrderByDescending(d => d.ViewNumber).ToList(),
                 MaxPages = maxPages
             };
 
@@ -76,7 +91,7 @@ namespace JMSearch.Models
         public DocumentsPaginate GetDocumentsByPageFromHistory(string keyWord, int lastPage)
         {
             var context = _Db.GetCollection<History>("History");
-            var query = Query<History>.EQ(h => h.KeyWord, keyWord);
+            var query = Query<History>.EQ(h => h.KeyWord.ToLower(), keyWord.ToLower());
             long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
 
             var histories = GetListPaginate(context, keyWord, lastPage, maxPages, query);

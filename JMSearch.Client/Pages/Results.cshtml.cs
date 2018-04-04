@@ -39,7 +39,7 @@ namespace JMSearch.Client.Pages
         }
 
         /// <summary>
-        /// 
+        /// OnPost
         /// </summary>
         public void OnPost()
         {
@@ -47,7 +47,7 @@ namespace JMSearch.Client.Pages
             SetConnectedState();
 
             CurrentPageNumber = 1;
-            KeyWord = Request.Form["keyWord"].ToString().Trim();
+            KeyWord = Request.Form["keyWord"].ToString()?.Trim();
 
             SetResults();
 
@@ -65,7 +65,7 @@ namespace JMSearch.Client.Pages
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync("http://localhost:5000/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+                HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -77,23 +77,5 @@ namespace JMSearch.Client.Pages
                 }
             }
         }
-
-        
-        public IActionResult GetDocumentInfos()
-        {
-            //HttpContext.Session.Set("Name", Encoding.ASCII.GetBytes(name));
-            //HttpContext.Session.Set("Paragraph", Encoding.ASCII.GetBytes(name));
-            return RedirectToPage("ResultInfos");
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Result
-    {
-        public int Id { get; set; }
-        public string Content { get; set; }
-        public string DocumentName { get; set; }
     }
 }
