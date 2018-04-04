@@ -46,7 +46,7 @@ namespace JMSearch.Documents.Treatment.Services
             {
                 StringBuilder sb = new StringBuilder();
                 int i = 0;
-                Microsoft.Office.Interop.Word.ApplicationClass wordApp = new ApplicationClass();
+                ApplicationClass wordApp = new ApplicationClass();
                 object file = filePath;
                 object nullobj = System.Reflection.Missing.Value;
                 Microsoft.Office.Interop.Word.Document doc = wordApp.Documents.Open
@@ -54,7 +54,7 @@ namespace JMSearch.Documents.Treatment.Services
                                                         ref nullobj, ref nullobj, ref nullobj,
                                                         ref nullobj, ref nullobj, ref nullobj,
                                                         ref nullobj, ref nullobj, ref nullobj);
-                Microsoft.Office.Interop.Word.Paragraphs DocPar = doc.Paragraphs;
+                Paragraphs DocPar = doc.Paragraphs;
                 // Count number of paragraphs in the file
                 long parCount = DocPar.Count;
                 // Step through the paragraphs
