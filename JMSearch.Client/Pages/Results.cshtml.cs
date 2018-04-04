@@ -78,7 +78,8 @@ namespace JMSearch.Client.Pages
                 }
                 catch (Exception ex)
                 {
-                    Results.Documents.Add(new Document { Id = "1", Name = "test", Paragraph = "test para", ViewNumber = 0 });
+                    // for test
+                    //Results.Documents.Add(new Document { Id = "1", Name = "test", Paragraph = "test para", ViewNumber = 0 });
                 }
             }
         }
