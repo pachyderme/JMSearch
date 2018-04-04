@@ -25,7 +25,7 @@
     {
         @foreach (var d in Model.Results.Documents)
         {
-            <a asp-action="GetDocumentInfos" class="resultUrl">
+            <a asp-page="ResultInfos" asp-route-name="@d.Name" asp-route-paragraph="@d.Paragraph" class="resultUrl">
 
                 <div class="result">
                     <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>

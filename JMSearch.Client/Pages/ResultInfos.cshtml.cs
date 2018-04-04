@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JMSearch.Client.Pages
 {
-    public class ResultInfosModel : PageModel
+    public class ResultInfosModel : PageBase
     {
-        public void OnGet()
+        public int MyProperty { get; set; }
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
         {
-
+            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
         }
     }
 }
