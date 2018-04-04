@@ -10,6 +10,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="wwwroot\sound\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\JMSearch.Models\JMSearch.Models.csproj" />
   </ItemGroup>
 </Project>
