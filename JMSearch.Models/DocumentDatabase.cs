@@ -24,7 +24,6 @@ namespace JMSearch.Models
         /// Database Mongo
         /// </summary>
         private MongoDatabase _Db;
-        private int _Id;
         #endregion
 
         #region Constructor
@@ -43,7 +42,6 @@ namespace JMSearch.Models
         /// <param name="document"></param>
         public void Create(Document document)
         {
-            document.Id = _Id++;
             _Db.GetCollection<Document>("Document").Save(document);
         }
 
@@ -85,18 +83,12 @@ namespace JMSearch.Models
 
             var histories = GetListPaginate(context, keyWord, lastPage, maxPages, request);
 
-            DocumentsPaginate result = new DocumentsPaginate
-            {
-                Documents = histories.Join(
-                _Db.GetCollection<Document>("Document").FindAll(),
-                h => h.DocumentId,
-                d => d.Id,
-                (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber }).ToList(),
-                MaxPages = maxPages
-            };
-
-            return result;
-        }
+        //    return histories.Join(
+        //        _Db.GetCollection<Document>("Document").FindAll(),
+        //        h => h.DocumentId,
+        //        d => d.Id,
+        //        (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber } ).ToList();
+        //}
 
         /// <summary>
         /// Get the list paginate
