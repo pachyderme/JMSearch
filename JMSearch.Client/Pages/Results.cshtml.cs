@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using JMSearch.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JMSearch.Client.Pages
 {
     public class ResultsModel : PageBase
     {
-        private List<Result> Results { get; set; }
+        public DocumentsPaginate Results { get; set; }
 
         #region UIModel
 
         public string KeyWord { get; set; }
-
-        public IEnumerable<IGrouping<string, Result>> ResultsUI { get; set; }
-
-        public int MaxPage { get; set; }
 
         public int NumberItemPerPage { get; set; }
 
@@ -35,7 +35,7 @@ namespace JMSearch.Client.Pages
             CurrentPageNumber = currentPageNumber;
             KeyWord = keyWord;
 
-            GetResults();
+            SetResults();
         }
 
         /// <summary>
@@ -47,54 +47,24 @@ namespace JMSearch.Client.Pages
             SetConnectedState();
 
             CurrentPageNumber = 1;
-
             KeyWord = Request.Form["keyWord"];
+
+            SetResults();
 
             if (Request.Form["JMHelp"].ToString() != string.Empty)
             {
                 ViewData["JMHelp"] = true;
                 // JMHelp Mode
             }
-
-            GetResults();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void GetResults()
+        private void SetResults()
         {
-            NumberItemPerPage = 2;
-
-            if (KeyWord != null && KeyWord.Trim() != string.Empty)
+            using (var client = new HttpClient())
             {
-                Results = new List<Result>
-                {
-                    new Result{ Content = "Toto1", DocumentName="Doc1"},
-                    new Result{ Content = "Toto2", DocumentName="Doc1"},
-                    new Result{ Content = "Toto3", DocumentName="Doc2"},
-                    new Result{ Content = "Toto4", DocumentName="Doc3"},
-                    new Result{ Content = "Toto5", DocumentName="Doc3"},
-                    new Result{ Content = "Toto6", DocumentName="Doc3"}
-                };
+                HttpResponseMessage response = client.GetAsync("http://localhost:5000/api/search/GetResponses/" + KeyWord).Result;
+                Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
             }
-            else
-            {
-                Results = new List<Result>();
-            }
-
-            ResultsUI = Results.GroupBy(r => r.DocumentName);
-
-            MaxPage = (int)Math.Ceiling((double)ResultsUI.Count() / NumberItemPerPage);
-
-            int startSkip = -1;
-
-            if (CurrentPageNumber > 1)
-            {
-                startSkip = NumberItemPerPage * (CurrentPageNumber - 1);
-            }
-
-            ResultsUI = ResultsUI.Skip(startSkip).Take(NumberItemPerPage);
         }
     }
 
