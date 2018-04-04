@@ -25,17 +25,22 @@
     {
         @foreach (var d in Model.Results.Documents)
         {
-            <h4>@d.Name</h4>
-            <div style="padding:0 15px 0 15px;">
-                @d.Paragraph
-            </div>
+            <a asp-page="ResultInfos" class="resultUrl">
+
+                <div class="result">
+                    <h4>@d.Name</h4>
+                    <div style="padding:0 15px 0 15px;">
+                        @d.Paragraph
+                    </div>
+                </div>
+            </a>
         }
     }
     else
     {
         <p>Aucun résultat</p>
     }
-    <div>
+    <div style="margin:5em 0 5em 0;">
         @if (Model.Results.MaxPages > 0)
         {
             <span>Page</span>

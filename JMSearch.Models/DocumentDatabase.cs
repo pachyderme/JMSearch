@@ -54,7 +54,7 @@ namespace JMSearch.Models
             var context = _Db.GetCollection<Document>("Document");
 
             var query = Query<Document>.Where(d => d.Paragraph.Contains(keyWord));
-            long maxPages = context.Find(query).Count();
+            long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
 
             var filterDocumentBuilder = Builders<Document>.Filter;
 
@@ -77,7 +77,7 @@ namespace JMSearch.Models
         {
             var context = _Db.GetCollection<History>("History");
             var query = Query<History>.EQ(h => h.KeyWord, keyWord);
-            long maxPages = context.Find(query).Count();
+            long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
 
             var histories = GetListPaginate(context, keyWord, lastPage, maxPages, query);
 

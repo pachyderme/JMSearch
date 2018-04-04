@@ -9,5 +9,11 @@ namespace JMSearch.Models
         public List<Document> Documents { get; set; }
 
         public long MaxPages { get; set; }
+
+        public DocumentsPaginate()
+        {
+            Documents = new List<Document>();
+            MaxPages = 1;
+        }
     }
 }

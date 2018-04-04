@@ -18,13 +18,14 @@ namespace JMSearch.API.Controllers
         /// GET the responses from a keyword
         /// </summary>
         /// <param name="keyWord"></param>
+        /// <param name="currentPage"></param>
         /// <returns></returns>
-        [HttpGet("GetResponses/{keyWord}")]
-        public DocumentsPaginate GetResponses(string keyWord)
+        [HttpGet("GetResponses/{keyWord}/{currentPage}")]
+        public DocumentsPaginate GetResponses(string keyWord, int currentPage)
         {
             _DocumentDatabase = new DocumentDatabase();
 
-            return _DocumentDatabase.GetDocumentByPage(keyWord, 1);
+            return _DocumentDatabase.GetDocumentByPage(keyWord, currentPage);
         }
     }
 }

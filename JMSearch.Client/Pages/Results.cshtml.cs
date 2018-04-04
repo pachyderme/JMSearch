@@ -58,12 +58,23 @@ namespace JMSearch.Client.Pages
             }
         }
 
+        /// <summary>
+        /// Set the results from API
+        /// </summary>
         private void SetResults()
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync("http://localhost:5000/api/search/GetResponses/" + KeyWord).Result;
-                Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+                HttpResponseMessage response = client.GetAsync("http://localhost:5000/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    Results = new DocumentsPaginate();
+                }
             }
         }
     }

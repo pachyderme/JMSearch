@@ -1,5 +1,5 @@
-﻿*, html {
-    font-family: 'Showcard Gothic';
+﻿* {
+    font-family: 'Comic Sans MS';
     overflow-x: hidden;
 }
 
@@ -72,4 +72,18 @@ a {
 .JMHelpI {
     position: absolute;
     -webkit-animation: run 3s infinite;
+}
+
+.result {
+    padding: 1em;
+    background-color: #f3f3f3;
+    margin: 2em 0 2em 0;
+}
+
+.resultUrl {
+    color: dimgrey;
+}
+
+.result h4{
+    color: black;
 }
