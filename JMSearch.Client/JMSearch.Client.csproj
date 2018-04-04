@@ -12,4 +12,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\sound\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JMSearch.Models\JMSearch.Models.csproj" />
+  </ItemGroup>
 </Project>

@@ -21,16 +21,13 @@
 <div style="padding:0 5em 0 5em;">
     <h2>Résultats</h2>
 
-    @if (Model.ResultsUI.Count() != 0)
+    @if (Model.Results.Documents.Count() != 0)
     {
-        @foreach (var r in Model.ResultsUI)
+        @foreach (var d in Model.Results.Documents)
         {
-            <h4>@r.First().DocumentName</h4>
+            <h4>@d.Name</h4>
             <div style="padding:0 15px 0 15px;">
-                @foreach (var p in r)
-                {
-                    <p>@p.Content</p>
-                }
+                @d.Paragraph
             </div>
         }
     }
@@ -39,10 +36,10 @@
         <p>Aucun résultat</p>
     }
     <div>
-        @if (Model.MaxPage > 0)
+        @if (Model.Results.MaxPages > 0)
         {
             <span>Page</span>
-            @for (int i = 1; i <= Model.MaxPage; i++)
+            @for (int i = 1; i <= Model.Results.MaxPages; i++)
             {
                 if (i == Model.CurrentPageNumber)
                 {

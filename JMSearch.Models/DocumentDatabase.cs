@@ -49,13 +49,20 @@ namespace JMSearch.Models
         /// Get the documents by page
         /// </summary>
         /// <param name="document"></param>
-        public List<Document> GetDocumentByPage(string keyWord, int lastPage)
+        public DocumentsPaginate GetDocumentByPage(string keyWord, int lastPage)
         {
             var context = _Db.GetCollection<Document>("Document");
+            long maxPages = context.Count();
 
             var filterDocumentBuilder = Builders<Document>.Filter;
 
-            return GetListPaginate(context, keyWord, lastPage, Query<Document>.Where(d => d.Paragraph.Contains(keyWord))).ToList();
+            DocumentsPaginate result = new DocumentsPaginate
+            {
+                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, Query<Document>.Where(d => d.Paragraph.Contains(keyWord))).ToList(),
+                MaxPages = maxPages
+            };
+
+            return result;
         }
 
         /// <summary>
@@ -84,12 +91,11 @@ namespace JMSearch.Models
         /// <param name="context"></param>
         /// <param name="keyWord"></param>
         /// <param name="lastPage"></param>
-        /// <param name="filter"></param>
+        /// <param name="maxPages"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, IMongoQuery query)
+        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, long maxPages, IMongoQuery query)
         {
-            long maxPages = context.Count();
-           
             int startSkip = -1;
 
             if (lastPage > 1)
@@ -99,7 +105,7 @@ namespace JMSearch.Models
 
             MongoCursor<T> result = null;
 
-            if(startSkip >= 0)
+            if (startSkip >= 0)
             {
                 result = context.Find(query).SetLimit(10).SetSkip(startSkip);
             }

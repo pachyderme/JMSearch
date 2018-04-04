@@ -20,7 +20,7 @@ namespace JMSearch.API.Controllers
         /// <param name="keyWord"></param>
         /// <returns></returns>
         [HttpGet("GetResponses/{keyWord}")]
-        public List<Document> GetResponses(string keyWord)
+        public DocumentsPaginate GetResponses(string keyWord)
         {
             _DocumentDatabase = new DocumentDatabase();
 
