@@ -14,6 +14,11 @@ input[type="text"], input[type="search"], input[type="password"] {
     transform: translateY(-50%);
 }
 
+.resultContainer{
+    background-color:red;
+    box-shadow:none;
+}
+
 img {
     display: inline-block;
     vertical-align: middle;

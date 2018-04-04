@@ -9,10 +9,13 @@ namespace JMSearch.Client.Pages
 {
     public class ResultInfosModel : PageBase
     {
-        public int MyProperty { get; set; }
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
+        public string Name { get; set; }
+        public string Paragraph { get; set; }
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
+            base.OnGet(disconnect, currentPageNumber, keyWord);
+
+
         }
     }
 }

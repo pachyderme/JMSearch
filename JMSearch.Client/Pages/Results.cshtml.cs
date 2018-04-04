@@ -26,9 +26,9 @@ namespace JMSearch.Client.Pages
 
         #endregion
 
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
+            base.OnGet(disconnect, currentPageNumber, keyWord);
             DisplayLogInActions = true;
             SetConnectedState();
 
