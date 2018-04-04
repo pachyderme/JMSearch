@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JMSearch.Client.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : PageBase
     {
-        public void OnGet()
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
         {
+            base.OnGet(disconnect, currentPageNumber, keyWord);
+
+            DisplayLogInActions = true;
         }
     }
 }

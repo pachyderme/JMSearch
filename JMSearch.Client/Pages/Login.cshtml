@@ -1,4 +1,13 @@
 ﻿@page
 @model JMSearch.Client.Pages.LoginModel
 
-<h2>Login</h2>
+<div class="center">
+    <form method="post" asp-page="/Login">
+        <input placeholder="Pseudo" type="text" name="pseudo" autofocus />
+        <input placeholder="Mot de passe" type="password" name="password" autofocus />
+        <div style="margin-top:1em;">
+            <input type="submit" value="S'inscrire" />
+            <input type="submit" value="Se connecter" />
+        </div>
+    </form>
+</div>

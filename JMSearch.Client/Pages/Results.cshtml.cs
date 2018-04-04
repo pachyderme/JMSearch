@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace JMSearch.Client.Pages
 {
-    public class ResultsModel : PageModel
+    public class ResultsModel : PageBase
     {
         private List<Result> Results { get; set; }
 
@@ -26,11 +26,12 @@ namespace JMSearch.Client.Pages
 
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void OnGet(int currentPageNumber, string keyWord)
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
         {
+            base.OnGet(disconnect, currentPageNumber, keyWord);
+            DisplayLogInActions = true;
+            SetConnectedState();
+
             CurrentPageNumber = currentPageNumber;
             KeyWord = keyWord;
 
@@ -42,10 +43,12 @@ namespace JMSearch.Client.Pages
         /// </summary>
         public void OnPost()
         {
+            DisplayLogInActions = true;
+            SetConnectedState();
+
             CurrentPageNumber = 1;
 
             KeyWord = Request.Form["keyWord"];
-
 
             if (Request.Form["JMHelp"].ToString() != string.Empty)
             {
@@ -54,7 +57,6 @@ namespace JMSearch.Client.Pages
             }
 
             GetResults();
-
         }
 
         /// <summary>

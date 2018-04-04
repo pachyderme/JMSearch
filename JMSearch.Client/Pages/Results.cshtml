@@ -2,7 +2,7 @@
 @model JMSearch.Client.Pages.ResultsModel
 
 <form method="post" style="text-align:left;">
-    <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" /></a>
+    <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" class="JMHelp"/></a>
     <input placeholder="Rechercher..." type="search" name="keyWord" value="@Model.KeyWord" autofocus style="width: 350px; height:30px;" />
     <input type="submit" value="Rechercher" />
 </form>
@@ -10,8 +10,9 @@
 @if (ViewData["JMHelp"] != null)
 {
     <div style="text-align:center;">
-        <img src="~/images/logo.png" style="width:150px; display: inline-block; vertical-align:middle;" />
+        <img src="~/images/jm.png" style="width:50px; display: inline-block; vertical-align:middle;" class="JMHelpI"/>
     </div>
+
 }
 
 <div style="padding:0 5em 0 5em;">
@@ -46,7 +47,7 @@
                 }
                 else
                 {
-                    <a asp-page="Results" asp-route-currentPageNumber="@i" asp-route-keyWord="@Model.KeyWord">@i</a>
+                    <a asp-action="OnGetPaginate" asp-route-currentPageNumber="@i" asp-route-keyWord="@Model.KeyWord">@i</a>
                 }
             }
         }
