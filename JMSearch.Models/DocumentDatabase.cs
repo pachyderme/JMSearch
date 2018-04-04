@@ -20,6 +20,7 @@ namespace JMSearch.Models
         /// Database Mongo
         /// </summary>
         private MongoDatabase _Db;
+        private int _Id;
         #endregion
 
         #region Constructor
@@ -38,6 +39,7 @@ namespace JMSearch.Models
         /// <param name="document"></param>
         public void Create(Document document)
         {
+            document.Id = _Id++;
             _Db.GetCollection<Document>("Document").Save(document);
         }
         #endregion
