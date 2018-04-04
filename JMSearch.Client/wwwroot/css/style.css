@@ -11,7 +11,7 @@ input[type="text"], input[type="search"], input[type="password"] {
 .center {
     text-align: center;
     margin-top: 45vh;
-    transform: translateY(-50%);
+    transform: translateY(-50%); 
 }
 
 .resultContainer{
