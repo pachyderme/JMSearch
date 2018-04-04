@@ -9,9 +9,9 @@ namespace JMSearch.Client.Pages
 {
     public class IndexModel : PageBase
     {
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord);
+            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
 
             DisplayLogInActions = true;
         }

@@ -26,14 +26,14 @@ namespace JMSearch.Client.Pages
 
         #endregion
 
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
+        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph)
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord);
+            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph);
             DisplayLogInActions = true;
             SetConnectedState();
 
             CurrentPageNumber = currentPageNumber;
-            KeyWord = keyWord.Trim();
+            KeyWord = keyWord?.Trim();
 
             SetResults();
         }
@@ -78,11 +78,11 @@ namespace JMSearch.Client.Pages
             }
         }
 
-        public IActionResult GetDocumentInfos(string name, string paragraph)
+        
+        public IActionResult GetDocumentInfos()
         {
-            HttpContext.Session.Set("Name", Encoding.ASCII.GetBytes(name));
-            HttpContext.Session.Set("Paragraph", Encoding.ASCII.GetBytes(name));
-
+            //HttpContext.Session.Set("Name", Encoding.ASCII.GetBytes(name));
+            //HttpContext.Session.Set("Paragraph", Encoding.ASCII.GetBytes(name));
             return RedirectToPage("ResultInfos");
         }
     }
