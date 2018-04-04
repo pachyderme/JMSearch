@@ -1,0 +1,75 @@
+﻿*, html {
+    font-family: 'Showcard Gothic';
+    overflow-x: hidden;
+}
+
+input[type="text"], input[type="search"], input[type="password"] {
+    width: 350px;
+    height: 30px;
+}
+
+.center {
+    text-align: center;
+    margin-top: 45vh;
+    transform: translateY(-50%);
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+form {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.JMHelp {
+    -webkit-animation: rotating 2s linear infinite;
+}
+
+@-webkit-keyframes rotatingI {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes run {
+    0% {
+        left: -1%;
+    }
+
+    70% {
+        left: 71%;
+    }
+
+    100% {
+        left: 101%;
+    }
+}
+
+#jmContainer {
+    margin-bottom: 70px;
+}
+
+.JMHelpI {
+    position: absolute;
+    -webkit-animation: run 3s infinite;
+}
