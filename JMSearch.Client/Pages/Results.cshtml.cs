@@ -33,7 +33,7 @@ namespace JMSearch.Client.Pages
             SetConnectedState();
 
             CurrentPageNumber = currentPageNumber;
-            KeyWord = keyWord;
+            KeyWord = keyWord.Trim();
 
             SetResults();
         }
@@ -47,7 +47,7 @@ namespace JMSearch.Client.Pages
             SetConnectedState();
 
             CurrentPageNumber = 1;
-            KeyWord = Request.Form["keyWord"];
+            KeyWord = Request.Form["keyWord"].ToString().Trim();
 
             SetResults();
 
@@ -76,6 +76,14 @@ namespace JMSearch.Client.Pages
                     Results = new DocumentsPaginate();
                 }
             }
+        }
+
+        public IActionResult GetDocumentInfos(string name, string paragraph)
+        {
+            HttpContext.Session.Set("Name", Encoding.ASCII.GetBytes(name));
+            HttpContext.Session.Set("Paragraph", Encoding.ASCII.GetBytes(name));
+
+            return RedirectToPage("ResultInfos");
         }
     }
 

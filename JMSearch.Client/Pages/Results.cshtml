@@ -25,10 +25,10 @@
     {
         @foreach (var d in Model.Results.Documents)
         {
-            <a asp-page="ResultInfos" class="resultUrl">
+            <a asp-route-name="@d.Name" asp-route-paragraph="@d.Paragraph" class="resultUrl">
 
                 <div class="result">
-                    <h4>@d.Name</h4>
+                    <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>
                     <div style="padding:0 15px 0 15px;">
                         @d.Paragraph
                     </div>
