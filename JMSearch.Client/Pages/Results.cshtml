@@ -26,16 +26,17 @@
         @foreach (var d in Model.Results.Documents)
         {
 
-                <form action="/" method="post" class="resultContainer">
-                    <button>
-                        <div class="result">
-                            <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>
-                            <div style="padding:0 15px 0 15px;">
-                                @d.Paragraph
-                            </div>
+            <form asp-page="ResultInfos" method="post" class="result">
+                <input name="documentId" value="@d.Id" style="display:none;" />
+                <button type="submit">
+                    <div>
+                        <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>
+                        <div style="padding:0 15px 0 15px;">
+                            @d.Paragraph
                         </div>
-                    </button>
-                </form>
+                    </div>
+                </button>
+            </form>
         }
     }
     else

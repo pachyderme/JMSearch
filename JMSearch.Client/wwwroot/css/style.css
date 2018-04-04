@@ -11,12 +11,12 @@ input[type="text"], input[type="search"], input[type="password"] {
 .center {
     text-align: center;
     margin-top: 45vh;
-    transform: translateY(-50%); 
+    transform: translateY(-50%);
 }
 
-.resultContainer{
-    background-color:red;
-    box-shadow:none;
+.resultContainer {
+    background-color: red;
+    box-shadow: none;
 }
 
 img {
@@ -80,7 +80,6 @@ a {
 }
 
 .result {
-    padding: 1em;
     background-color: #f3f3f3;
     margin: 2em 0 2em 0;
 }
@@ -89,6 +88,19 @@ a {
     color: dimgrey;
 }
 
-.result h4{
+.result h4 {
     color: black;
+}
+
+.result button {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1em;
+}
+
+.result button:hover {
+    cursor: pointer;
 }

@@ -65,15 +65,20 @@ namespace JMSearch.Client.Pages
         {
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+                Results = new DocumentsPaginate();
 
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+                    HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Results = new DocumentsPaginate();
+                    Results.Documents.Add(new Document { Id = "1", Name = "test", Paragraph = "test para", ViewNumber = 0 });
                 }
             }
         }

@@ -12,22 +12,33 @@ namespace JMSearch.Client.Pages
     public class ResultInfosModel : PageBase
     {
         public int MyProperty { get; set; }
-        public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord, string name, string paragraph, string documentId)
+        
+        public void OnPost()
         {
-            base.OnGet(disconnect, currentPageNumber, keyWord, name, paragraph, documentId);
+            var documentId = Request.Form["documentId"];
 
-            IncrementView(documentId);
+            if(documentId != string.Empty)
+            {
+                IncrementView(documentId);
+            }
         }
 
         private void IncrementView(string documentId)
         {
             using (var client = new HttpClient())
             {
-                Dictionary<string, string> pairs = new Dictionary<string, string>();
-                pairs.Add("documentId", documentId);
-                FormUrlEncodedContent content = new FormUrlEncodedContent(pairs);
+                try
+                {
+                    Dictionary<string, string> pairs = new Dictionary<string, string>();
+                    pairs.Add("documentId", documentId);
+                    FormUrlEncodedContent content = new FormUrlEncodedContent(pairs);
 
-                HttpResponseMessage response = client.PostAsync("http://192.168.206.145/api/search/PostDocumentView/", content).Result;
+                    HttpResponseMessage response = client.PostAsync("http://192.168.206.145/api/search/PostDocumentView/", content).Result;
+                }
+                catch(Exception ex)
+                {
+                    // can't increment the view property
+                }
             }
         }
     }
