@@ -15,7 +15,8 @@ namespace JMSearch.Models
         /// Document identifier
         /// </summary>
         [BsonId]
-        public BsonObjectId Id { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         /// <summary>
         /// Name of the document
         /// </summary>

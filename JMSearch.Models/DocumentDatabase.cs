@@ -54,14 +54,13 @@ namespace JMSearch.Models
             var context = _Db.GetCollection<Document>("Document");
 
             var query = Query<Document>.Where(d => d.Paragraph.Contains(keyWord));
-            var request = context.Find(query);
-            long maxPages = request.Count();
+            long maxPages = context.Find(query).Count();
 
             var filterDocumentBuilder = Builders<Document>.Filter;
 
             DocumentsPaginate result = new DocumentsPaginate
             {
-                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, request).ToList(),
+                Documents = GetListPaginate(context, keyWord, lastPage, maxPages, query).ToList(),
                 MaxPages = maxPages
             };
 
@@ -78,17 +77,22 @@ namespace JMSearch.Models
         {
             var context = _Db.GetCollection<History>("History");
             var query = Query<History>.EQ(h => h.KeyWord, keyWord);
-            var request = context.Find(query);
-            long maxPages = request.Count();
+            long maxPages = context.Find(query).Count();
 
-            var histories = GetListPaginate(context, keyWord, lastPage, maxPages, request);
+            var histories = GetListPaginate(context, keyWord, lastPage, maxPages, query);
 
-        //    return histories.Join(
-        //        _Db.GetCollection<Document>("Document").FindAll(),
-        //        h => h.DocumentId,
-        //        d => d.Id,
-        //        (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber } ).ToList();
-        //}
+            DocumentsPaginate result = new DocumentsPaginate
+            {
+                Documents = histories.Join(
+                _Db.GetCollection<Document>("Document").FindAll(),
+                h => h.DocumentId,
+                d => d.Id,
+                (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber }).ToList(),
+                MaxPages = maxPages
+            };
+
+            return result;
+        }
 
         /// <summary>
         /// Get the list paginate
@@ -100,7 +104,7 @@ namespace JMSearch.Models
         /// <param name="maxPages"></param>
         /// <param name="query"></param>
         /// <returns></returns>
-        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, long maxPages, MongoCursor<T> request)
+        private MongoCursor<T> GetListPaginate<T>(MongoCollection<T> context, string keyWord, int lastPage, long maxPages, IMongoQuery query)
         {
             int startSkip = -1;
 
@@ -113,11 +117,11 @@ namespace JMSearch.Models
 
             if (startSkip >= 0)
             {
-                result = request.SetLimit(10).SetSkip(startSkip);
+                result = context.Find(query).SetLimit(10).SetSkip(startSkip);
             }
             else
             {
-                result = request.SetLimit(10);
+                result = context.Find(query).SetLimit(10);
             }
 
             return result;

@@ -1,7 +1,7 @@
 ﻿@page
 @model JMSearch.Client.Pages.ResultsModel
 
-<form method="post" style="text-align:left;">
+<form method="post" style="text-align:left;overflow:hidden;">
     <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" class="JMHelp" /></a>
     <input placeholder="Rechercher..." type="search" name="keyWord" value="@Model.KeyWord" autofocus style="width: 350px; height:30px;" />
     <input type="submit" value="Rechercher" />

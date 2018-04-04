@@ -25,7 +25,9 @@ namespace JMSearch.Models
         /// <summary>
         /// DocumentId of the history
         /// </summary>
-        public int DocumentId { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string DocumentId { get; set; }
 
         /// <summary>
         /// Keyword of the history
