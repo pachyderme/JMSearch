@@ -37,16 +37,11 @@
 
     @if (ViewData["DocumentScript"] != null)
     {
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-            $("#iframeID").load(function () {
-                var iframe = $("#iframeID").contents();
-
-                $(iframe).scroll(function () {
-                    //your code here
-                    console.log("Scrolling");
-                });
-            });
+            var elem = document.getElementById('rechercheOK').textContent;
+            console.log(elem);
+            window.find(elem);
+           
         </script>
     }
 </body>
