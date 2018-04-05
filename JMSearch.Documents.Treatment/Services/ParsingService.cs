@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Wordprocessing;
 using JMSearch.Models;
 using Microsoft.Office.Interop.Word;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,18 +31,14 @@ namespace JMSearch.Documents.Treatment.Services
         /// Database link
         /// </summary>
         private DocumentDatabase _DocumentDatabase;
-
-        /// <summary>
-        /// List of paragraphes
-        /// </summary>
-        private List<Models.Document> _ListParagraphes;
         #endregion
 
         #region Constructor
         public ParsingService(string directoryPath)
         {
             _DirectoryPath = directoryPath;
-            _FilesPath = Directory.GetFiles(_DirectoryPath, "*.doc");
+            _FilesPath = Directory.GetFiles(_DirectoryPath, "*.doc", SearchOption.AllDirectories)
+                         .Where(str => !Path.GetFileName(str).StartsWith("~$")).ToArray();
             _DocumentDatabase = new DocumentDatabase();
             ParseDocuments();
         }
@@ -52,6 +49,8 @@ namespace JMSearch.Documents.Treatment.Services
         {
             Parallel.ForEach(_FilesPath, (filePath) =>
             {
+                List<Models.Document> _ListParagraphes = new List<Models.Document>();
+                
                 Console.WriteLine("Début Document : " + Path.GetFileName(filePath));
                 StringBuilder sb = new StringBuilder();
                 int i = 0;
@@ -80,13 +79,6 @@ namespace JMSearch.Documents.Treatment.Services
                         && DocPar[i].Range.Text != "\f"
                         && DocPar[i].Range.Text != "\t")
                     {
-                        //_DocumentDatabase.Create(new Models.Document
-                        //{
-                        //    Name = Path.GetFileName(filePath),
-                        //    Paragraph = DocPar[i].Range.Text,
-                        //    ViewNumber = 0
-                        //});
-
                         _ListParagraphes.Add(new Models.Document
                         {
                             Name = Path.GetFileName(filePath),
@@ -95,8 +87,11 @@ namespace JMSearch.Documents.Treatment.Services
                         });
                     }
                 }
-                
-                
+
+                foreach (var paragraphe in _ListParagraphes)
+                {
+                    _DocumentDatabase.Create(paragraphe);
+                }
 
                 doc.Close(ref nullobj, ref nullobj, ref nullobj);
                 wordApp.Quit(ref nullobj, ref nullobj, ref nullobj);

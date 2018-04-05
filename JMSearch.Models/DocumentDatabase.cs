@@ -141,15 +141,6 @@ namespace JMSearch.Models
 
             return result;
         }
-
-		/// <summary>
-		/// Insert many docuement in database
-		/// </summary>
-		/// <param name="documents"></param>
-		public void CreateMany(IEnumerable<Document> documents)
-		{
-			_Db.GetCollection<Document>("Document").InsertBatch(documents);
-		}
         #endregion
     }
 }
