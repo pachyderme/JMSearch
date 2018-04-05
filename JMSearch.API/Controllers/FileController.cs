@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using JMSearch.API.Properties;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +23,12 @@ namespace JMSearch.API.Controllers
         [HttpGet("{name}")]
         public Task<Stream> Get(string name)
         {
+            Console.WriteLine($" {DateTime.Now} | FILE : Get => name : {name}");
+
             HttpResponseMessage result;
             using (var client = new HttpClient())
             {
-                result = client.GetAsync("http://192.168.206.126:5000/api/documents?name="+name).Result;
+                result = client.GetAsync(Resources.URLBaseDocumentAPI + "?name=" + name).Result;
             }
 
             return result.Content.ReadAsStreamAsync();

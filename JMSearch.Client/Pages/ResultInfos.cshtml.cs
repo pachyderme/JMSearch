@@ -22,6 +22,9 @@ namespace JMSearch.Client.Pages
 
         }
 
+        /// <summary>
+        /// OnPost
+        /// </summary>
         public void OnPost()
         {
             DocumentName = Path.GetFileNameWithoutExtension(Request.Form["documentName"]);
@@ -36,6 +39,10 @@ namespace JMSearch.Client.Pages
             }
         }
 
+        /// <summary>
+        /// Increment the view for the document
+        /// </summary>
+        /// <param name="documentId"></param>
         private void IncrementView(string documentId)
         {
             using (var client = new HttpClient())
@@ -46,7 +53,7 @@ namespace JMSearch.Client.Pages
                     pairs.Add("documentId", documentId);
                     FormUrlEncodedContent content = new FormUrlEncodedContent(pairs);
 
-                    HttpResponseMessage response = client.PostAsync("http://192.168.206.145/api/search/PostDocumentView/", content).Result;
+                    HttpResponseMessage response = client.PostAsync(URLPostDocumentView, content).Result;
                 }
                 catch(Exception ex)
                 {
