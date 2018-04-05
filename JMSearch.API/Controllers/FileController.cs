@@ -25,7 +25,7 @@ namespace JMSearch.API.Controllers
             HttpResponseMessage result;
             using (var client = new HttpClient())
             {
-                result = client.GetAsync("http://192.168.206.126:5000/api/documents/"+name).Result;
+                result = client.GetAsync("http://192.168.206.126:5000/api/documents?name="+name).Result;
             }
 
             return result.Content.ReadAsStreamAsync();

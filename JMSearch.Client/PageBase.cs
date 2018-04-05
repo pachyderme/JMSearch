@@ -23,7 +23,7 @@ namespace JMSearch.Client
         public PageBase(IMemoryCache memoryCache)
         {
             Cache = memoryCache;
-            URLDocumentAPI = "http://192.168.206.145/api/file/";
+            URLDocumentAPI = "http://localhost:5000/api/file/";
         }
 
         /// <summary>
