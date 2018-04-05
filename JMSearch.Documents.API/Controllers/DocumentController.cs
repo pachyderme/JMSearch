@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using System;
 using System.IO;
 
 namespace JMSearch.Documents.API.Controllers
@@ -18,9 +18,12 @@ namespace JMSearch.Documents.API.Controllers
 		/// <param name="name"></param>
 		/// <returns></returns>
 		[Produces(typeof(Stream))]
-		public IActionResult Get(string name)
+        [HttpGet("{name}")]
+        public IActionResult Get(string name)
 		{
-			if (!Directory.Exists(_pathDocuments))
+            Console.WriteLine($" {DateTime.Now} | DOCUMENT : Get => name : {name}");
+
+            if (!Directory.Exists(_pathDocuments))
 				throw new DirectoryNotFoundException("Le dossier : \"" + _pathDocuments + "\" n'existe pas.");
 
 			var fileInfo = new FileInfo(Path.Combine(_pathDocuments, name + ".pdf"));

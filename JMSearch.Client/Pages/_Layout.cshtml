@@ -30,13 +30,23 @@
     {
         <script>
             var player = document.querySelector('#audioPlayer');
-           
+            player.play();
 
-            var myVar = setInterval(myTimer, 2000);
+        </script>
+    }
 
-            function myTimer() {
-                player.play();
-            }
+    @if (ViewData["DocumentScript"] != null)
+    {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $("#iframeID").load(function () {
+                var iframe = $("#iframeID").contents();
+
+                $(iframe).scroll(function () {
+                    //your code here
+                    console.log("Scrolling");
+                });
+            });
         </script>
     }
 </body>
