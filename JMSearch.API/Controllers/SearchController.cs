@@ -26,7 +26,7 @@ namespace JMSearch.API.Controllers
         {
             Console.WriteLine($" {DateTime.Now} | SEARCH : GetResponses => keyword : {keyWord}, currentPage : {currentPage}");
 
-            _DocumentDatabase = new DocumentDatabase();
+            _DocumentDatabase = DocumentDatabase.GetInstance();
 
             return _DocumentDatabase.GetDocumentByPage(keyWord, currentPage);
         }
@@ -41,7 +41,7 @@ namespace JMSearch.API.Controllers
         {
             Console.WriteLine($" {DateTime.Now} | SEARCH : PostDocumentView => documentId : {documentId}");
 
-            _DocumentDatabase = new DocumentDatabase();
+            _DocumentDatabase = DocumentDatabase.GetInstance();
 
             _DocumentDatabase.IncrementViewDocument(documentId);
         }

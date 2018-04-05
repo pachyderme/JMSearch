@@ -39,7 +39,7 @@ namespace JMSearch.Documents.Treatment.Services
             _DirectoryPath = directoryPath;
             _FilesPath = Directory.GetFiles(_DirectoryPath, "*.doc", SearchOption.AllDirectories)
                          .Where(str => !Path.GetFileName(str).StartsWith("~$")).ToArray();
-            _DocumentDatabase = new DocumentDatabase();
+            _DocumentDatabase = DocumentDatabase.GetInstance();
             ParseDocuments();
         }
         #endregion

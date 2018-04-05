@@ -24,10 +24,22 @@ namespace JMSearch.Models
         /// Database Mongo
         /// </summary>
         private MongoDatabase _Db;
+
+        private static DocumentDatabase Instance;
         #endregion
 
+        public static DocumentDatabase GetInstance()
+        {
+            if(Instance == null)
+            {
+                Instance = new DocumentDatabase();
+            }
+
+            return Instance;
+        }
+
         #region Constructor
-        public DocumentDatabase()
+        private DocumentDatabase()
         {
             _Client = new MongoClient("mongodb://192.168.206.125:27017");
             _Server = _Client.GetServer();
