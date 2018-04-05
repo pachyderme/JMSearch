@@ -4,10 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace JMSearch.Client.Pages
 {
     public class AccountModel : PageBase
     {
+        public AccountModel(IMemoryCache cache) : base(cache)
+        {
+
+        }
     }
 }

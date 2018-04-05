@@ -5,14 +5,18 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 
 namespace JMSearch.Client.Pages
 {
     public class ResultInfosModel : PageBase
     {
-        public int MyProperty { get; set; }
-        
+        public ResultInfosModel(IMemoryCache cache) : base(cache)
+        {
+
+        }
+
         public void OnPost()
         {
             var documentId = Request.Form["documentId"];

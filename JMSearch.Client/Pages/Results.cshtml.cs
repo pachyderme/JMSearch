@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using JMSearch.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -25,6 +26,11 @@ namespace JMSearch.Client.Pages
         public int CurrentPageNumber { get; set; }
 
         #endregion
+
+        public ResultsModel(IMemoryCache cache) : base(cache)
+        {
+
+        }
 
         public override void OnGet(bool? disconnect, int currentPageNumber, string keyWord)
         {
