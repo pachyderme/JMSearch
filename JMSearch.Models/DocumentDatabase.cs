@@ -53,7 +53,7 @@ namespace JMSearch.Models
         public void IncrementViewDocument(string documentId)
         {
             var context = _Db.GetCollection<Document>("Document");
-            Document doc = context.FindOneById((BsonValue)documentId);
+            Document doc = context.FindOneById(ObjectId.Parse(documentId));
 
             doc.ViewNumber++;
 
