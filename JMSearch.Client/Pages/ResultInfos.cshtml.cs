@@ -13,7 +13,7 @@ namespace JMSearch.Client.Pages
 {
     public class ResultInfosModel : PageBase
     {
-        public string DocumentParagraph { get; set; }
+        public string DocumentPage { get; set; }
         public string DocumentName { get; set; }
 
 
@@ -28,11 +28,11 @@ namespace JMSearch.Client.Pages
         public void OnPost()
         {
             DocumentName = Path.GetFileNameWithoutExtension(Request.Form["documentName"]);
-            DocumentParagraph = Request.Form["documentParagraph"];
+            DocumentPage = Request.Form["documentPage"];
 
             var documentId = Request.Form["documentId"];
 
-            if (documentId != string.Empty && DocumentName != string.Empty && DocumentParagraph != string.Empty )
+            if (documentId != string.Empty && DocumentName != string.Empty && DocumentPage != string.Empty )
             {
                 IncrementView(documentId);
                 ViewData["DocumentScript"] = true;

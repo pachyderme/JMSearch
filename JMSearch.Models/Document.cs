@@ -30,6 +30,10 @@ namespace JMSearch.Models
         /// Sum of them specifiy the most read docuement
         /// </summary>
         public int ViewNumber { get; set; }
+        /// <summary>
+        /// Page
+        /// </summary>
+        public int Page { get; set; }
         #endregion
     }
 }

@@ -38,9 +38,7 @@
     @if (ViewData["DocumentScript"] != null)
     {
         <script>
-            var elem = document.getElementById('rechercheOK').textContent;
-            console.log(elem);
-            window.find(elem);
+            document.querySelector('iframe').scrollTo(0, 1200 *@Model.DocumentPage);
            
         </script>
     }

@@ -67,6 +67,7 @@ namespace JMSearch.Documents.Treatment.Services
                 long parCount = DocPar.Count;
                 // Step through the paragraphs
                 string paragraph = string.Empty;
+                int pageNumber = 0;
                 Console.WriteLine("Paragraphes trouvés : " + parCount+ " -- Document : "+ Path.GetFileName(filePath));
                 while (i < parCount)
                 {
@@ -83,7 +84,8 @@ namespace JMSearch.Documents.Treatment.Services
                         {
                             Name = Path.GetFileName(filePath),
                             Paragraph = DocPar[i].Range.Text,
-                            ViewNumber = 0
+                            ViewNumber = 0,
+                            Page = GetPageNumberOfRange(DocPar[i].Range)
                         });
                     }
                 }
@@ -98,6 +100,11 @@ namespace JMSearch.Documents.Treatment.Services
                 Console.WriteLine("FIN Document : " + Path.GetFileName(filePath));
                 Console.WriteLine("---------------------------------------------------------------------------------");
             });
+        }
+
+        private static int GetPageNumberOfRange(Range range)
+        {
+            return (int)range.get_Information(WdInformation.wdActiveEndPageNumber);
         }
         #endregion
     }
