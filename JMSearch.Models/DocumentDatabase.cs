@@ -30,7 +30,7 @@ namespace JMSearch.Models
 
         public static DocumentDatabase GetInstance()
         {
-            if(Instance == null)
+            if (Instance == null)
             {
                 Instance = new DocumentDatabase();
             }
@@ -49,12 +49,12 @@ namespace JMSearch.Models
 
         #region Methods
         /// <summary>
-        /// Document creation and database saving
+        /// Entity creation and database saving
         /// </summary>
         /// <param name="document"></param>
-        public void Create(Document document)
+        public void Create<T>(T entity)
         {
-            _Db.GetCollection<Document>("Document").Save(document);
+            _Db.GetCollection<T>(entity.GetType().Name).Save(entity);
         }
 
         /// <summary>
@@ -70,6 +70,31 @@ namespace JMSearch.Models
             doc.ViewNumber++;
 
             context.Save(doc);
+        }
+
+        /// <summary>
+        /// Get a user by pseudo and password
+        /// </summary>
+        /// <param name="pseudo"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public User GetUserByPseudoAndPassword(string pseudo, string password)
+        {
+            var context = _Db.GetCollection<User>("User");
+
+            return context.Find(Query<User>.Where(u => u.Pseudo == pseudo && u.Password == password)).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Get histories of a user by the userId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public List<History> GetHistoriesByUserId(string userId)
+        {
+            var context = _Db.GetCollection<History>("History");
+
+            return context.Find(Query<History>.Where(h => h.UserId == userId)).ToList();
         }
 
         /// <summary>

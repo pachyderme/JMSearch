@@ -20,7 +20,8 @@ namespace JMSearch.Client
         public string URLGetResultsAPI { get => URLBaseLoadBalancer + "search/GetResponses/"; }
         public string URLPostDocumentView { get => URLBaseLoadBalancer + "search/PostDocumentView/"; }
         public string URLDocumentAPI { get => URLBaseLoadBalancer + "file/"; }
-
+        public string URLUserAPI { get => URLBaseLoadBalancer + "user/"; }
+        public string URLHistoryAPI { get => URLBaseLoadBalancer + "history/"; }
 
         public IMemoryCache Cache { get; set; }
 

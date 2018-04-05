@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JMSearch.Models
 {
-    public class History
+    public class User
     {
         #region Properties
 
@@ -20,23 +20,14 @@ namespace JMSearch.Models
         public string Id { get; set; }
 
         /// <summary>
-        /// User Id of the history
+        /// Pseudo of the user
         /// </summary>
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string UserId { get; set; }
+        public string Pseudo { get; set; }
 
         /// <summary>
-        /// DocumentId of the history
+        /// Password of the user
         /// </summary>
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string DocumentId { get; set; }
-
-        /// <summary>
-        /// Keyword of the history
-        /// </summary>
-        public string KeyWord { get; set; }
+        public string Password { get; set; }
 
         #endregion
     }

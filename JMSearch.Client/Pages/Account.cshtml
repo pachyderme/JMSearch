@@ -1,5 +1,28 @@
 ﻿@page
 @model JMSearch.Client.Pages.AccountModel
 
-<h2>Account</h2>
+<h4>Historique de recherche</h4>
+
+<div style="padding:0 5em 0 5em;">
+    @if (Model.Histories.Count() != 0)
+    {
+        @foreach (var h in Model.Histories)
+        {
+
+            <form asp-page="Results" method="post" class="result">
+                <input name="keyWord" value="@h.KeyWord" type="hidden" />
+                <button type="submit">
+                    <div>
+                        <h4>Sujet de recherche : @h.KeyWord</h4>
+                    </div>
+                </button>
+            </form>
+        }
+    }
+    else
+    {
+        <p>Aucun historique</p>
+    }
+</div>
+
 
