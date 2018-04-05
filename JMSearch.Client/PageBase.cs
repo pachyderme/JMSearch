@@ -12,6 +12,7 @@ namespace JMSearch.Client
     {
         public bool IsConnected { get; set; }
         public bool DisplayLogInActions { get; set; }
+        public string GetURLDocumentAPI { get; set; }
 
         private IMemoryCache _cache;
 
@@ -22,6 +23,7 @@ namespace JMSearch.Client
         public PageBase(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
+            GetURLDocumentAPI = "192.168.206.126:5000/api/documents?name=";
         }
 
         /// <summary>
