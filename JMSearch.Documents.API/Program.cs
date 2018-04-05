@@ -20,6 +20,7 @@ namespace JMSearch.Documents.API
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+            .UseUrls("http://192.168.206.126:5000")
                 .Build();
     }
 }

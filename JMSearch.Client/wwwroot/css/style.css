@@ -1,0 +1,110 @@
+﻿* {
+    font-family: 'Comic Sans MS';
+    overflow-x: hidden;
+}
+
+input[type="text"], input[type="search"], input[type="password"] {
+    width: 350px;
+    height: 30px;
+}
+
+.center {
+    text-align: center;
+    margin-top: 45vh;
+    transform: translateY(-50%);
+}
+
+.resultContainer {
+    background-color: red;
+    box-shadow: none;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+form {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+@-webkit-keyframes rotating {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.JMHelp {
+    -webkit-animation: rotating 2s linear infinite;
+}
+.iframeStyle{
+    height:70vh;
+    width:100%;
+}
+
+@-webkit-keyframes rotatingI {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes run {
+    0% {
+        left: -1%;
+    }
+
+    70% {
+        left: 71%;
+    }
+
+    100% {
+        left: 101%;
+    }
+}
+
+#jmContainer {
+    margin-bottom: 70px;
+}
+
+.JMHelpI {
+    position: absolute;
+    -webkit-animation: run 3s infinite;
+}
+
+.result {
+    background-color: #f3f3f3;
+    margin: 2em 0 2em 0;
+}
+
+.resultUrl {
+    color: dimgrey;
+}
+
+.result h4 {
+    color: black;
+}
+
+.result button {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 1em;
+}
+
+.result button:hover {
+    cursor: pointer;
+}

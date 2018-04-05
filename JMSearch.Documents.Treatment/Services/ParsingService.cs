@@ -9,6 +9,7 @@ using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace JMSearch.Documents.Treatment.Services
 {
@@ -42,11 +43,12 @@ namespace JMSearch.Documents.Treatment.Services
         #region Methods
         private void ParseDocuments()
         {
-            foreach (var filePath in _FilesPath)
+            Parallel.ForEach(_FilesPath, (filePath) =>
             {
+                Console.WriteLine("Début Document : " + Path.GetFileName(filePath));
                 StringBuilder sb = new StringBuilder();
                 int i = 0;
-                Microsoft.Office.Interop.Word.ApplicationClass wordApp = new ApplicationClass();
+                ApplicationClass wordApp = new ApplicationClass();
                 object file = filePath;
                 object nullobj = System.Reflection.Missing.Value;
                 Microsoft.Office.Interop.Word.Document doc = wordApp.Documents.Open
@@ -54,13 +56,18 @@ namespace JMSearch.Documents.Treatment.Services
                                                         ref nullobj, ref nullobj, ref nullobj,
                                                         ref nullobj, ref nullobj, ref nullobj,
                                                         ref nullobj, ref nullobj, ref nullobj);
-                Microsoft.Office.Interop.Word.Paragraphs DocPar = doc.Paragraphs;
+                Paragraphs DocPar = doc.Paragraphs;
                 // Count number of paragraphs in the file
                 long parCount = DocPar.Count;
                 // Step through the paragraphs
                 string paragraph = string.Empty;
+                Console.WriteLine("Paragraphes trouvés : " + parCount+ " -- Document : "+ Path.GetFileName(filePath));
                 while (i < parCount)
                 {
+                    if (i % 100 == 0)
+                    {
+                        Console.WriteLine("Paragraphes parcourus : " + i + " -- Document : " + Path.GetFileName(filePath));
+                    }
                     i++;
                     if (DocPar[i].Range.Text != "\r"
                         && DocPar[i].Range.Text != "\f"
@@ -68,7 +75,7 @@ namespace JMSearch.Documents.Treatment.Services
                     {
                         _DocumentDatabase.Create(new Models.Document
                         {
-                            Name = filePath,
+                            Name = Path.GetFileName(filePath),
                             Paragraph = DocPar[i].Range.Text,
                             ViewNumber = 0
                         });
@@ -76,7 +83,9 @@ namespace JMSearch.Documents.Treatment.Services
                 }
                 doc.Close(ref nullobj, ref nullobj, ref nullobj);
                 wordApp.Quit(ref nullobj, ref nullobj, ref nullobj);
-            }
+                Console.WriteLine("FIN Document : " + Path.GetFileName(filePath));
+                Console.WriteLine("---------------------------------------------------------------------------------");
+            });
         }
         #endregion
     }

@@ -8,7 +8,8 @@ namespace JMSearch.Documents.Treatment
         static void Main(string[] args)
         {
             // New document parsing serice
-            new ParsingService(@"C:\ARCHI\");
+            new ParsingService(@"C:\Archives\");
+            Console.ReadLine();
         }
     }
 }

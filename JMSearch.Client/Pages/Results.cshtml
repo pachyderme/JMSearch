@@ -1,45 +1,55 @@
 ﻿@page
 @model JMSearch.Client.Pages.ResultsModel
 
-<form method="post" style="text-align:left;">
-    <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" class="JMHelp"/></a>
+<form method="post" style="text-align:left;overflow:hidden;">
+    <a asp-page="Index"><img src="~/images/logo.png" style="width:100px; display: inline-block; vertical-align:middle;" class="JMHelp" /></a>
     <input placeholder="Rechercher..." type="search" name="keyWord" value="@Model.KeyWord" autofocus style="width: 350px; height:30px;" />
     <input type="submit" value="Rechercher" />
 </form>
 
 @if (ViewData["JMHelp"] != null)
 {
-    <div style="text-align:center;">
-        <img src="~/images/jm.png" style="width:50px; display: inline-block; vertical-align:middle;" class="JMHelpI"/>
+    <div id="jmContainer">
+        <img src="~/images/jm.png" style="width:50px; display: inline-block; vertical-align:middle;" class="JMHelpI" />
     </div>
+    <audio id="audioPlayer">
+        <source src="~/sound/jm.mp3">
+    </audio>
 
 }
 
 <div style="padding:0 5em 0 5em;">
     <h2>Résultats</h2>
 
-    @if (Model.ResultsUI.Count() != 0)
+    @if (Model.Results.Documents.Count() != 0)
     {
-        @foreach (var r in Model.ResultsUI)
+        @foreach (var d in Model.Results.Documents)
         {
-            <h4>@r.First().DocumentName</h4>
-            <div style="padding:0 15px 0 15px;">
-                @foreach (var p in r)
-                {
-                    <p>@p.Content</p>
-                }
-            </div>
+
+            <form asp-page="ResultInfos" method="post" class="result">
+                <input name="documentId" value="@d.Id" type="hidden"/>
+                <input name="documentName" value="@d.Name" type="hidden"/>
+                <input name="documentParagraph" value="@d.Paragraph" type="hidden"/>
+                <button type="submit">
+                    <div>
+                        <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>
+                        <div style="padding:0 15px 0 15px;">
+                            @d.Paragraph
+                        </div>
+                    </div>
+                </button>
+            </form>
         }
     }
     else
     {
         <p>Aucun résultat</p>
     }
-    <div>
-        @if (Model.MaxPage > 0)
+    <div style="margin:5em 0 5em 0;">
+        @if (Model.Results.MaxPages > 0)
         {
             <span>Page</span>
-            @for (int i = 1; i <= Model.MaxPage; i++)
+            @for (int i = 1; i <= Model.Results.MaxPages; i++)
             {
                 if (i == Model.CurrentPageNumber)
                 {

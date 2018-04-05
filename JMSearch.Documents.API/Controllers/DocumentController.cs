@@ -10,7 +10,7 @@ namespace JMSearch.Documents.API.Controllers
 	[Route("api/Documents")]
 	public class DocumentController : Controller
     {
-		private readonly string _pathDocuments = @"C:\Temp\Documents";
+		private readonly string _pathDocuments = @"C:\Archives\";
 
 		/// <summary>
 		/// Obtient un pdf en fonction du nom.
