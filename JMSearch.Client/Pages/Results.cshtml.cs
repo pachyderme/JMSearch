@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -83,6 +84,8 @@ namespace JMSearch.Client.Pages
 
                     try
                     {
+                        var watch = new Stopwatch();
+                        watch.Start();
                         HttpResponseMessage response = client.GetAsync(URLGetResultsAPI + KeyWord + "/" + CurrentPageNumber).Result;
 
                         if (response.IsSuccessStatusCode)
@@ -91,6 +94,10 @@ namespace JMSearch.Client.Pages
 
                             SetCachedValue(KeyWord, Results);
                         }
+
+                        watch.Stop();
+
+                        Console.WriteLine(watch.ElapsedMilliseconds);
                     }
                     catch (Exception ex)
                     {
