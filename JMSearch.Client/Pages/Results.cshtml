@@ -27,7 +27,9 @@
         {
 
             <form asp-page="ResultInfos" method="post" class="result">
-                <input name="documentId" value="@d.Id" style="display:none;" />
+                <input name="documentId" value="@d.Id" type="hidden"/>
+                <input name="documentName" value="@d.Name" type="hidden"/>
+                <input name="documentParagraph" value="@d.Paragraph" type="hidden"/>
                 <button type="submit">
                     <div>
                         <h4>@d.Name.Split(".doc")[0] - @d.ViewNumber vues</h4>

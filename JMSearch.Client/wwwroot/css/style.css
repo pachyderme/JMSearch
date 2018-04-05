@@ -45,6 +45,10 @@ a {
 .JMHelp {
     -webkit-animation: rotating 2s linear infinite;
 }
+.iframeStyle{
+    height:70vh;
+    width:100%;
+}
 
 @-webkit-keyframes rotatingI {
     from {
