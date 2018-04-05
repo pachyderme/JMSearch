@@ -20,14 +20,21 @@ namespace JMSearch.Documents.Treatment.Services
         /// Directory for picking up the files
         /// </summary>
         private string _DirectoryPath;
+
         /// <summary>
         /// All files path in directory
         /// </summary>
         private string[] _FilesPath;
+
         /// <summary>
         /// Database link
         /// </summary>
         private DocumentDatabase _DocumentDatabase;
+
+        /// <summary>
+        /// List of paragraphes
+        /// </summary>
+        private List<Models.Document> _ListParagraphes;
         #endregion
 
         #region Constructor
@@ -73,7 +80,14 @@ namespace JMSearch.Documents.Treatment.Services
                         && DocPar[i].Range.Text != "\f"
                         && DocPar[i].Range.Text != "\t")
                     {
-                        _DocumentDatabase.Create(new Models.Document
+                        //_DocumentDatabase.Create(new Models.Document
+                        //{
+                        //    Name = Path.GetFileName(filePath),
+                        //    Paragraph = DocPar[i].Range.Text,
+                        //    ViewNumber = 0
+                        //});
+
+                        _ListParagraphes.Add(new Models.Document
                         {
                             Name = Path.GetFileName(filePath),
                             Paragraph = DocPar[i].Range.Text,
@@ -81,6 +95,9 @@ namespace JMSearch.Documents.Treatment.Services
                         });
                     }
                 }
+                
+                
+
                 doc.Close(ref nullobj, ref nullobj, ref nullobj);
                 wordApp.Quit(ref nullobj, ref nullobj, ref nullobj);
                 Console.WriteLine("FIN Document : " + Path.GetFileName(filePath));
