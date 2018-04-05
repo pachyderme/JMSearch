@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JMSearch.Client.Properties;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
 using System;
@@ -12,7 +13,14 @@ namespace JMSearch.Client
     {
         public bool IsConnected { get; set; }
         public bool DisplayLogInActions { get; set; }
-        public string URLDocumentAPI { get; set; }
+
+        public string URLDocumentAPI { get => "http://localhost:5000/api/file/"; }
+
+        private string URLBaseLoadBalancer { get => Resources.URLBaseLoadBalancer; }
+        public string URLGetResultsAPI { get => URLBaseLoadBalancer + "search/GetResponses/"; }
+        public string URLPostDocumentView { get => URLBaseLoadBalancer + "search/PostDocumentView/"; }
+        //public string URLDocumentAPI { get => URLBaseLoadBalancer + "file/"; }
+
 
         public IMemoryCache Cache { get; set; }
 
@@ -23,7 +31,6 @@ namespace JMSearch.Client
         public PageBase(IMemoryCache memoryCache)
         {
             Cache = memoryCache;
-            URLDocumentAPI = "http://localhost:5000/api/file/";
         }
 
         /// <summary>

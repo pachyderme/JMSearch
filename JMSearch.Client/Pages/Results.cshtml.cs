@@ -83,7 +83,7 @@ namespace JMSearch.Client.Pages
 
                     try
                     {
-                        HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+                        HttpResponseMessage response = client.GetAsync(URLGetResultsAPI + KeyWord + "/" + CurrentPageNumber).Result;
 
                         if (response.IsSuccessStatusCode)
                         {
