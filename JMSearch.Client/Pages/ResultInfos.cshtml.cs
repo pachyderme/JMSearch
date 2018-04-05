@@ -11,13 +11,17 @@ namespace JMSearch.Client.Pages
 {
     public class ResultInfosModel : PageBase
     {
-        public int MyProperty { get; set; }
-        
+        public string DocumentParagraph { get; set; }
+        public string DocumentName { get; set; }
+
         public void OnPost()
         {
+            DocumentName = Request.Form["documentName"];
+            DocumentParagraph = Request.Form["documentParagraph"];
+
             var documentId = Request.Form["documentId"];
 
-            if(documentId != string.Empty)
+            if (documentId != string.Empty && DocumentName != string.Empty && DocumentParagraph != string.Empty )
             {
                 IncrementView(documentId);
             }
