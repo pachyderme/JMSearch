@@ -69,23 +69,34 @@ namespace JMSearch.Client.Pages
         /// </summary>
         private void SetResults()
         {
-            using (var client = new HttpClient())
+            var value = GetCachedValue<DocumentsPaginate>(KeyWord);
+
+            if (value != null)
             {
-                Results = new DocumentsPaginate();
-
-                try
+                Results = value;
+            }
+            else
+            {
+                using (var client = new HttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+                    Results = new DocumentsPaginate();
 
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+                        HttpResponseMessage response = client.GetAsync("http://192.168.206.145/api/search/GetResponses/" + KeyWord + "/" + CurrentPageNumber).Result;
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
+
+                            SetCachedValue(KeyWord, Results);
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    // for test
-                    //Results.Documents.Add(new Document { Id = "1", Name = "test", Paragraph = "test para", ViewNumber = 0 });
+                    catch (Exception ex)
+                    {
+                        // for test
+                        //Results.Documents.Add(new Document { Id = "1", Name = "test", Paragraph = "test para", ViewNumber = 0 });
+                    }
                 }
             }
         }

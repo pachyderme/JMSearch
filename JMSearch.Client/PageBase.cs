@@ -80,5 +80,14 @@ namespace JMSearch.Client
         {
             return Cache.Get<T>(key);
         }
+
+        /// <summary>
+        /// Set a cached value
+        /// </summary>
+        /// <returns></returns>
+        public T SetCachedValue<T>(string key, T value, int expirationTime = 15)
+        {
+            return Cache.Set<T>(key, value, DateTime.Now.AddMinutes(expirationTime));
+        }
     }
 }
