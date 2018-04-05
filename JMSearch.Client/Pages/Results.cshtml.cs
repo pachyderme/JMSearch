@@ -58,10 +58,45 @@ namespace JMSearch.Client.Pages
 
             SetResults();
 
+            AddHistory(KeyWord);
+
             if (Request.Form["JMHelp"].ToString() != string.Empty)
             {
                 ViewData["JMHelp"] = true;
                 // JMHelp Mode
+            }
+        }
+
+        /// <summary>
+        /// Add a history
+        /// </summary>
+        /// <param name="documentId"></param>
+        /// <param name="keyWord"></param>
+        private void AddHistory(string keyWord)
+        {
+            HttpContext.Session.TryGetValue("UserId", out byte[] userIdTmp);
+
+            if(userIdTmp != null)
+            {
+                using (var client = new HttpClient())
+                {
+                    try
+                    {
+                        string userId = Encoding.ASCII.GetString(userIdTmp);
+
+
+                        Dictionary<string, string> pairs = new Dictionary<string, string>();
+                        pairs.Add("documentId", "");
+                        pairs.Add("keyWord", keyWord);
+                        pairs.Add("userId", userId);
+                        FormUrlEncodedContent content = new FormUrlEncodedContent(pairs);
+
+                        HttpResponseMessage response = client.PostAsync(URLHistoryAPI, content).Result;
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
             }
         }
 

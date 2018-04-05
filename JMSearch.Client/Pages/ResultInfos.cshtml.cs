@@ -38,33 +38,7 @@ namespace JMSearch.Client.Pages
             if (documentId != string.Empty && DocumentName != string.Empty && DocumentPage != string.Empty  && keyWord != string.Empty)
             {
                 IncrementView(documentId);
-                AddHistory(documentId, keyWord);
                 ViewData["DocumentScript"] = true;
-            }
-        }
-
-        private void AddHistory(StringValues documentId, StringValues keyWord)
-        {
-            using (var client = new HttpClient())
-            {
-                try
-                {
-                    HttpContext.Session.TryGetValue("UserId", out byte[] userIdTmp);
-
-                    string userId = Encoding.ASCII.GetString(userIdTmp);
-
-                    Dictionary<string, string> pairs = new Dictionary<string, string>();
-                    pairs.Add("documentId", documentId);
-                    pairs.Add("keyWord", keyWord);
-                    pairs.Add("userId", userId);
-                    FormUrlEncodedContent content = new FormUrlEncodedContent(pairs);
-
-                    HttpResponseMessage response = client.PostAsync(URLHistoryAPI, content).Result;
-                }
-                catch (Exception ex)
-                {
-                    // can't increment the view property
-                }
             }
         }
 
