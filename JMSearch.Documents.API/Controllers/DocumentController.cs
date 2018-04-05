@@ -18,7 +18,8 @@ namespace JMSearch.Documents.API.Controllers
 		/// <param name="name"></param>
 		/// <returns></returns>
 		[Produces(typeof(Stream))]
-		public IActionResult Get(string name)
+        [HttpGet("{name}")]
+        public IActionResult Get(string name)
 		{
 			if (!Directory.Exists(_pathDocuments))
 				throw new DirectoryNotFoundException("Le dossier : \"" + _pathDocuments + "\" n'existe pas.");
