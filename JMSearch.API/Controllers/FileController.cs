@@ -23,6 +23,8 @@ namespace JMSearch.API.Controllers
         [HttpGet("{name}")]
         public Task<Stream> Get(string name)
         {
+            Console.WriteLine($" {DateTime.Now} | FILE : Get => name : {name}");
+
             HttpResponseMessage result;
             using (var client = new HttpClient())
             {

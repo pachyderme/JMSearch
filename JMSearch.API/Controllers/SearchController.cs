@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using JMSearch.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace JMSearch.API.Controllers
 {
@@ -23,6 +24,8 @@ namespace JMSearch.API.Controllers
         [HttpGet("GetResponses/{keyWord}/{currentPage}")]
         public DocumentsPaginate GetResponses(string keyWord, int currentPage)
         {
+            Console.WriteLine($" {DateTime.Now} | SEARCH : GetResponses => keyword : {keyWord}, currentPage : {currentPage}");
+
             _DocumentDatabase = new DocumentDatabase();
 
             return _DocumentDatabase.GetDocumentByPage(keyWord, currentPage);
@@ -36,6 +39,8 @@ namespace JMSearch.API.Controllers
         [HttpPost("PostDocumentView")]
         public void PostDocumentView(string documentId)
         {
+            Console.WriteLine($" {DateTime.Now} | SEARCH : PostDocumentView => documentId : {documentId}");
+
             _DocumentDatabase = new DocumentDatabase();
 
             _DocumentDatabase.IncrementViewDocument(documentId);
