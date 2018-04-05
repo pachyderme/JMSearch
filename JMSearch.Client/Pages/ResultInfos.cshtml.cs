@@ -12,6 +12,11 @@ namespace JMSearch.Client.Pages
 {
     public class ResultInfosModel : PageBase
     {
+        public ResultInfosModel(IMemoryCache cache) : base(cache)
+        {
+
+        }
+
         public string DocumentParagraph { get; set; }
         public string DocumentName { get; set; }
 

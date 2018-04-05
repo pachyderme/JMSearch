@@ -14,7 +14,7 @@ namespace JMSearch.Client
         public bool DisplayLogInActions { get; set; }
         public string GetURLDocumentAPI { get; set; }
 
-        private IMemoryCache _cache;
+        public IMemoryCache Cache { get; set; }
 
         /// <summary>
         /// Constructor
@@ -22,8 +22,7 @@ namespace JMSearch.Client
         /// <param name="memoryCache"></param>
         public PageBase(IMemoryCache memoryCache)
         {
-            _cache = memoryCache;
-            GetURLDocumentAPI = "192.168.206.126:5000/api/documents?name=";
+            Cache = memoryCache;
         }
 
         /// <summary>
@@ -74,17 +73,12 @@ namespace JMSearch.Client
         }
 
         /// <summary>
-        /// 
+        /// Get a cached value
         /// </summary>
         /// <returns></returns>
-        public T CacheGetOrCreateAsync<T>(string key)
+        public T GetCachedValue<T>(string key)
         {
-            var result = _cache.GetOrCreate<T>(key, entry =>
-            {
-                return entry.Value;
-            });
-
-            return result;
+            return Cache.Get<T>(key);
         }
     }
 }
