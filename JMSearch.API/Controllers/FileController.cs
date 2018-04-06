@@ -38,20 +38,15 @@ namespace JMSearch.API.Controllers
             Console.WriteLine($" {DateTime.Now} | FILE : Get => name : {name}");
 
             HttpResponseMessage response;
-            Stream result = GetCachedValue<Stream>(name);
+            Stream result;
 
-            if(result == null)
+            using (var client = new HttpClient())
             {
-                using (var client = new HttpClient())
-                {
-                    response = client.GetAsync(Resources.URLBaseDocumentAPI + "?name=" + name).Result;
-                }
-
-                result = response.Content.ReadAsStreamAsync().Result;
-
-                SetCachedValue(name, result);
+                response = client.GetAsync(Resources.URLBaseDocumentAPI + "/" + name).Result;
             }
-            
+
+            result = response.Content.ReadAsStreamAsync().Result;
+
             return result;
         }
 
