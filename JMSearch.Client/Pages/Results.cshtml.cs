@@ -76,7 +76,7 @@ namespace JMSearch.Client.Pages
         {
             HttpContext.Session.TryGetValue("UserId", out byte[] userIdTmp);
 
-            if(userIdTmp != null)
+            if (userIdTmp != null)
             {
                 using (var client = new HttpClient())
                 {
@@ -105,7 +105,7 @@ namespace JMSearch.Client.Pages
         /// </summary>
         private void SetResults()
         {
-            var value = GetCachedValue<DocumentsPaginate>(KeyWord);
+            var value = GetCachedValue<DocumentsPaginate>(KeyWord + CurrentPageNumber);
 
             if (value != null)
             {
@@ -127,7 +127,7 @@ namespace JMSearch.Client.Pages
                         {
                             Results = JsonConvert.DeserializeObject<DocumentsPaginate>(response.Content.ReadAsStringAsync().Result);
 
-                            SetCachedValue(KeyWord, Results);
+                            SetCachedValue(KeyWord + CurrentPageNumber, Results);
                         }
 
                         watch.Stop();

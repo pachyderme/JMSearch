@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace JMSearch.Client
 {
+    [ResponseCache(Duration = 10)]
     public abstract class PageBase : PageModel
     {
         public bool IsConnected { get; set; }
@@ -87,7 +88,15 @@ namespace JMSearch.Client
         /// <returns></returns>
         public T GetCachedValue<T>(string key)
         {
-            return Cache.Get<T>(key);
+            T result = default(T);
+            try
+            {
+                result = Cache.Get<T>(key);
+            }catch(Exception e)
+            {
+
+            }
+            return result;
         }
 
         /// <summary>
