@@ -61,7 +61,7 @@ namespace JMSearch.Client.Properties {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à http://localhost:5000/api/.
+        ///   Recherche une chaîne localisée semblable à http://192.168.206.103:5000/api/.
         /// </summary>
         internal static string URLBaseLoadBalancer {
             get {

@@ -36,22 +36,40 @@ namespace JMSearch.Client.Pages
             SHA256 sha256 = SHA256.Create();
             byte[] bytes = Encoding.UTF8.GetBytes(password);
             byte[] passwordCrypted = sha256.ComputeHash(bytes);
+            string passwordHashed = GetStringFromHash(passwordCrypted);
 
             string pageResult = "Login";
 
-            if (Request.Form["subscribe"].ToString() != null && CreateUser(pseudo, passwordCrypted.ToString()))
+            if (Request.Form["subscribe"].Count > 0 && CreateUser(pseudo, passwordHashed))
             {
                 pageResult = "Index";
             }
 
-            if (pageResult == "Index" && CheckUserExists(pseudo, passwordCrypted.ToString())
-                || Request.Form["connect"].ToString() != null)
+            if (pageResult == "Index" || Request.Form["connect"].Count > 0)
             {
-                pageResult = "Index";
+                if(CheckUserExists(pseudo, passwordHashed))
+                {
+                    pageResult = "Index";
+                }
             }
 
 
             return RedirectToPage(pageResult);
+        }
+
+        /// <summary>
+        /// Get string from the hash
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        private static string GetStringFromHash(byte[] hash)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                result.Append(hash[i].ToString("X2"));
+            }
+            return result.ToString();
         }
 
         /// <summary>

@@ -119,32 +119,32 @@ namespace JMSearch.Models
             return result;
         }
 
-        /// <summary>
-        /// Get the documents by page from the history table
-        /// </summary>
-        /// <param name="keyWord"></param>
-        /// <param name="lastPage"></param>
-        /// <returns></returns>
-        public DocumentsPaginate GetDocumentsByPageFromHistory(string keyWord, int lastPage)
-        {
-            var context = _Db.GetCollection<History>("History");
-            var query = Query<History>.EQ(h => h.KeyWord.ToLower(), keyWord.ToLower());
-            long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
+        ///// <summary>
+        ///// Get the documents by page from the history table
+        ///// </summary>
+        ///// <param name="keyWord"></param>
+        ///// <param name="lastPage"></param>
+        ///// <returns></returns>
+        //public DocumentsPaginate GetDocumentsByPageFromHistory(string keyWord, int lastPage)
+        //{
+        //    var context = _Db.GetCollection<History>("History");
+        //    var query = Query<History>.EQ(h => h.KeyWord.ToLower(), keyWord.ToLower());
+        //    long maxPages = (long)Math.Ceiling((decimal)context.Find(query).Count() / 10);
 
-            var histories = GetListPaginate(context, keyWord, lastPage, maxPages, query);
+        //    var histories = GetListPaginate(context, keyWord, lastPage, maxPages, query);
 
-            DocumentsPaginate result = new DocumentsPaginate
-            {
-                Documents = histories.Join(
-                _Db.GetCollection<Document>("Document").FindAll(),
-                h => h.DocumentId,
-                d => d.Id,
-                (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber }).ToList(),
-                MaxPages = maxPages
-            };
+        //    DocumentsPaginate result = new DocumentsPaginate
+        //    {
+        //        Documents = histories.Join(
+        //        _Db.GetCollection<Document>("Document").FindAll(),
+        //        h => h.DocumentId,
+        //        d => d.Id,
+        //        (h, d) => new Document { Id = d.Id, Name = d.Name, Paragraph = d.Paragraph, ViewNumber = d.ViewNumber }).ToList(),
+        //        MaxPages = maxPages
+        //    };
 
-            return result;
-        }
+        //    return result;
+        //}
 
         /// <summary>
         /// Get the list paginate

@@ -42,7 +42,7 @@ namespace JMSearch.API.Controllers
 
             _DocumentDatabase = DocumentDatabase.GetInstance();
 
-            History history = new History { DocumentId = documentId, KeyWord = keyWord, UserId = userId };
+            History history = new History { KeyWord = keyWord, UserId = userId };
 
             _DocumentDatabase.Create(history);
         }

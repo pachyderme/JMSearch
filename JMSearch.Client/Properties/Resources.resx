@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="URLBaseLoadBalancer" xml:space="preserve">
-    <value>http://localhost:5000/api/</value>
+    <value>http://192.168.206.103:5000/api/</value>
   </data>
 </root>

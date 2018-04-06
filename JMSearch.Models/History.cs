@@ -22,16 +22,8 @@ namespace JMSearch.Models
         /// <summary>
         /// User Id of the history
         /// </summary>
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
-
-        /// <summary>
-        /// DocumentId of the history
-        /// </summary>
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string DocumentId { get; set; }
 
         /// <summary>
         /// Keyword of the history
