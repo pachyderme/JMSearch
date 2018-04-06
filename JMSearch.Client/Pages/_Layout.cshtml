@@ -37,9 +37,13 @@
 
     @if (ViewData["DocumentScript"] != null)
     {
-        <script>
-            document.querySelector('iframe').scrollTo(0, 1200 *@Model.DocumentPage);
-           
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $("document").ready(function () {
+                $("#iframeContainer").animate({ scrollTop: 1200*@Model.DocumentPage }, 1000); //500 - time of animation
+            });
         </script>
     }
 </body>
