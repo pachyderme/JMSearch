@@ -10,7 +10,9 @@
 @if (ViewData["JMHelp"] != null)
 {
     <div id="jmContainer">
-        <img src="~/images/jm.png" style="width:50px; display: inline-block; vertical-align:middle;" class="JMHelpI" />
+        <a asp-page="EasterEgg">
+            <img src="~/images/jm.png" style="width:50px; display: inline-block; vertical-align:middle;" class="JMHelpI" />
+        </a>
     </div>
     <audio id="audioPlayer">
         <source src="~/sound/jm.mp3">
