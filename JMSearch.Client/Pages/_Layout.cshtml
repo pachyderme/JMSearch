@@ -7,7 +7,7 @@
     <title>JMSearch</title>
 </head>
 <body>
-    <div>
+    <div style="height:100%;">
         @if (Model.DisplayLogInActions)
         {
             <div style="position:absolute; top:1em; right:1em;">
@@ -42,7 +42,7 @@
 
         <script type="text/javascript">
             $("document").ready(function () {
-                $("#iframeContainer").animate({ scrollTop: 1200*@Model.DocumentPage }, 1000); //500 - time of animation
+                $("#iframeContainer").scrollTop(1200 *@Model.DocumentPage);
             });
         </script>
     }
