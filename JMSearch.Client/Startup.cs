@@ -23,6 +23,7 @@ namespace JMSearch.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
+            services.AddResponseCaching();
             services.AddMvc().AddRazorPagesOptions(o =>
             {
                 o.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
@@ -44,6 +45,7 @@ namespace JMSearch.Client
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseResponseCaching();
             app.UseStaticFiles();
             app.UseSession();
             app.UseMvc();
