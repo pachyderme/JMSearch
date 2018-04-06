@@ -2,9 +2,9 @@
 @model JMSearch.Client.Pages.ResultInfosModel
 
 <h2>Résultat de la recherche</h2>
-<div id="content">
-    <iframe src="@Model.URLDocumentAPI@Model.DocumentName" class="iframeStyle" id="iframeID">
-    </iframe>
+<div id="iframeContainer" style="width: 100%; height: 600px; overflow: auto;">
+    <iframe width="100%" height="6000" src="@Model.URLDocumentAPI@Model.DocumentName" scrolling="no"></iframe>
+    //You have to know exact width and height of PDF file
 </div>
 
 
